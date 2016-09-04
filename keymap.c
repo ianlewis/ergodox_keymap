@@ -16,6 +16,7 @@ limitations under the License.
 
 #include "ergodox.h"
 #include "debug.h"
+#include "mousekey.h"
 #include "timer.h"
 #include "action_layer.h"
 #include "version.h"
@@ -31,9 +32,9 @@ enum {
   KF_VERSION,
 
   // Function / number keys
-  KF_1, // 1, F1
-  KF_2, // 2, F2
-  KF_3, // ...
+  KF_1,     // 1, F1
+  KF_2,     // 2, F2
+  KF_3,     // ...
   KF_4,
   KF_5,
   KF_6,
@@ -41,7 +42,13 @@ enum {
   KF_8,
   KF_9,
   KF_10,
-  KF_11  // -, F11
+  KF_11,    // -, F11
+       
+  // Diagonal mouse movement
+  A_MUL,
+  A_MUR,
+  A_MDL,
+  A_MDR
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -102,41 +109,41 @@ ALT+SUPER is used for switching input language mode.
  * ,--------------------------------------------------.           ,--------------------------------------------------.
  * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
  * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
- * |        |      |      | MsUp |      |      |      |           |      |      |      |      |      |      |        |
- * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
- * |        |      |MsLeft|MsDown|MsRght|      |------|           |------|      |      |      |      |      |        |
- * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
- * |        |      |      |      |      |      |      |           |      |      |      | Prev | Next |      |        |
+ * |        |      |      |  Up  |      |      |      |           |Scroll|      |MsUpL | MsUp |MnUpR |      |        |
+ * |--------+------+------+------+------+------|      |           |Up    |------+------+------+------+------+--------|
+ * |        |      | Left | Down | Right|      |------|           |------|      |MsLeft| MsDn |MsRght|      |        |
+ * |--------+------+------+------+------+------|      |           |Scroll|------+------+------+------+------+--------|
+ * |        |      |      | Down |      |      |      |           |Down  |      |MsDnL | MsDn |MsDnR |      |        |
  * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
- *   |      |      |      | Lclk | Rclk |                                       |VolUp |VolDn | Mute | Play |      |
+ *   |      |      |      |      |      |                                       |      |      |      |      |      |
  *   `----------------------------------'                                       `----------------------------------'
  *                                        ,-------------.       ,-------------.
- *                                        |      |      |       |      |      |
+ *                                        |      | Mute |       | Prev | Next |
  *                                 ,------|------|------|       |------+------+------.
- *                                 |      |      |      |       |      |      |Brwser|
- *                                 |      |      |------|       |------|      |Back  |
- *                                 |      |      |      |       |      |      |      |
+ *                                 |Play/ |Stop  |VolUp |       |      |Mouse |Mouse |
+ *                                 |Pause |      |------|       |------|Left  |Right |
+ *                                 |      |      |VolDn |       |      |Click |Click |
  *                                 `--------------------'       `--------------------'
  */
 // MEDIA AND MOUSE
 [MEDIA] = KEYMAP(
        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-       KC_TRNS, KC_TRNS, KC_TRNS, KC_MS_U, KC_TRNS, KC_TRNS, KC_TRNS,
-       KC_TRNS, KC_TRNS, KC_MS_L, KC_MS_D, KC_MS_R, KC_TRNS,
-       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-       KC_TRNS, KC_TRNS, KC_TRNS, KC_BTN1, KC_BTN2,
-                                           KC_TRNS, KC_TRNS,
-                                                    KC_TRNS,
-                                  KC_TRNS, KC_TRNS, KC_TRNS,
+       KC_TRNS, KC_TRNS, KC_TRNS, KC_UP,   KC_TRNS, KC_TRNS, KC_TRNS,
+       KC_TRNS, KC_TRNS, KC_LEFT, KC_DOWN, KC_RGHT, KC_TRNS,
+       KC_TRNS, KC_TRNS, KC_TRNS, KC_DOWN, KC_TRNS, KC_TRNS, KC_TRNS,
+       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+                                           KC_TRNS, KC_MUTE,
+                                                    KC_VOLU,
+                                  KC_MPLY, KC_MSTP, KC_VOLD,
        // right hand
-       KC_TRNS,  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-       KC_TRNS,  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-                 KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-       KC_TRNS,  KC_TRNS, KC_TRNS, KC_MPRV, KC_MNXT, KC_TRNS, KC_TRNS,
-                          KC_VOLU, KC_VOLD, KC_MUTE, KC_MPLY, KC_TRNS,
-       KC_TRNS, KC_TRNS,
+       KC_TRNS,  KC_TRNS, KC_TRNS,  KC_TRNS, KC_TRNS,  KC_TRNS, KC_TRNS,
+       KC_WH_U,  KC_TRNS, M(A_MUL), KC_MS_U, M(A_MUR), KC_TRNS, KC_TRNS,
+                 KC_TRNS, KC_MS_L,  KC_MS_D, KC_MS_R,  KC_TRNS, KC_TRNS,
+       KC_WH_D,  KC_TRNS, M(A_MDL), KC_MS_D, M(A_MDR), KC_TRNS, KC_TRNS,
+                          KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+       KC_MPRV, KC_MNXT,
        KC_TRNS,
-       KC_TRNS, KC_TRNS, KC_WBAK
+       KC_TRNS, KC_BTN1, KC_BTN2
 ),
 
 /* Keymap 2: MAC OSX layer
@@ -187,41 +194,41 @@ ALT+SUPER is used for switching input language mode.
  * ,--------------------------------------------------.           ,--------------------------------------------------.
  * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
  * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
- * |        |      |      | MsUp |      |      |      |           |      |      |      |      |      |      |        |
- * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
- * |        |      |MsLeft|MsDown|MsRght|      |------|           |------|      |      |      |      |      |        |
- * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
- * |        |      |      |      |      |      |      |           |      |      |      | Prev | Next |      |        |
+ * |        |      |      |  Up  |      |      |      |           |Scroll|      |MsUpL | MsUp |MnUpR |      |        |
+ * |--------+------+------+------+------+------|      |           |Up    |------+------+------+------+------+--------|
+ * |        |      | Left | Down | Right|      |------|           |------|      |MsLeft| MsDn |MsRght|      |        |
+ * |--------+------+------+------+------+------|      |           |Scroll|------+------+------+------+------+--------|
+ * |        |      |      | Down |      |      |      |           |Down  |      |MsDnL | MsDn |MsDnR |      |        |
  * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
- *   |      |      |      | Lclk | Rclk |                                       |VolUp |VolDn | Mute | Play |      |
+ *   |      |      |      |      |      |                                       |      |      |      |      |      |
  *   `----------------------------------'                                       `----------------------------------'
  *                                        ,-------------.       ,-------------.
- *                                        |      |      |       |      |      |
+ *                                        |      | Mute |       | Prev | Next |
  *                                 ,------|------|------|       |------+------+------.
- *                                 |      |      |      |       |      |      |Brwser|
- *                                 |      |      |------|       |------|      |Back  |
- *                                 |      |      |      |       |      |      |      |
+ *                                 |Play/ |Stop  |VolUp |       |      |Mouse |Mouse |
+ *                                 |Pause |      |------|       |------|Left  |Right |
+ *                                 |      |      |VolDn |       |      |Click |Click |
  *                                 `--------------------'       `--------------------'
  */
 // MEDIA AND MOUSE for OSX
 [OSXMEDIA] = KEYMAP(
        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-       KC_TRNS, KC_TRNS, KC_TRNS, KC_MS_U, KC_TRNS, KC_TRNS, KC_TRNS,
-       KC_TRNS, KC_TRNS, KC_MS_L, KC_MS_D, KC_MS_R, KC_TRNS,
-       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-       KC_TRNS, KC_TRNS, KC_TRNS, KC_BTN1, KC_BTN2,
-                                           KC_TRNS, KC_TRNS,
-                                                    KC_TRNS,
-                                  KC_TRNS, KC_TRNS, KC_TRNS,
+       KC_TRNS, KC_TRNS, KC_TRNS, KC_UP,   KC_TRNS, KC_TRNS, KC_TRNS,
+       KC_TRNS, KC_TRNS, KC_LEFT, KC_DOWN, KC_RGHT, KC_TRNS,
+       KC_TRNS, KC_TRNS, KC_TRNS, KC_DOWN, KC_TRNS, KC_TRNS, KC_TRNS,
+       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+                                           KC_TRNS, KC_MUTE,
+                                                    KC_VOLU,
+                                  KC_MPLY, KC_MSTP, KC_VOLD,
        // right hand
-       KC_TRNS,  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-       KC_TRNS,  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-                 KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-       KC_TRNS,  KC_TRNS, KC_TRNS, KC_MPRV, KC_MNXT, KC_TRNS, KC_TRNS,
-                          KC_VOLU, KC_VOLD, KC_MUTE, KC_MPLY, KC_TRNS,
-       KC_TRNS, KC_TRNS,
+       KC_TRNS,  KC_TRNS, KC_TRNS,  KC_TRNS, KC_TRNS,  KC_TRNS, KC_TRNS,
+       KC_WH_U,  KC_TRNS, M(A_MUL), KC_MS_U, M(A_MUR), KC_TRNS, KC_TRNS,
+                 KC_TRNS, KC_MS_L,  KC_MS_D, KC_MS_R,  KC_TRNS, KC_TRNS,
+       KC_WH_D,  KC_TRNS, M(A_MDL), KC_MS_D, M(A_MDR), KC_TRNS, KC_TRNS,
+                          KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+       KC_MPRV, KC_MNXT,
        KC_TRNS,
-       KC_TRNS, KC_TRNS, KC_WBAK
+       KC_TRNS, KC_BTN1, KC_BTN2
 ),
 
 };
@@ -264,7 +271,51 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt) {
         case KF_1 ... KF_11:
             ang_handle_kf(record, id);
             break;
-      }
+        /* Mouse movement */
+        case A_MUL:
+            if (record->event.pressed) {
+                mousekey_on(KC_MS_UP);
+                mousekey_on(KC_MS_LEFT);
+            } else {
+                mousekey_off(KC_MS_UP);
+                mousekey_off(KC_MS_LEFT);
+            }
+            mousekey_send();
+            break;
+
+        case A_MUR:
+            if (record->event.pressed) {
+                mousekey_on(KC_MS_UP);
+                mousekey_on(KC_MS_RIGHT);
+            } else {
+                mousekey_off(KC_MS_UP);
+                mousekey_off(KC_MS_RIGHT);
+            }
+            mousekey_send();
+            break;
+
+        case A_MDL:
+            if (record->event.pressed) {
+                mousekey_on(KC_MS_DOWN);
+                mousekey_on(KC_MS_LEFT);
+            } else {
+                mousekey_off(KC_MS_DOWN);
+                mousekey_off(KC_MS_LEFT);
+            }
+            mousekey_send();
+            break;
+
+        case A_MDR:
+            if (record->event.pressed) {
+                mousekey_on(KC_MS_DOWN);
+                mousekey_on(KC_MS_RIGHT);
+            } else {
+                mousekey_off(KC_MS_DOWN);
+                mousekey_off(KC_MS_RIGHT);
+            }
+            mousekey_send();
+            break;
+    }
     return MACRO_NONE;
 }
 
