@@ -11,7 +11,25 @@ build:
   # Read more about steps on our dev center:
   # http://devcenter.wercker.com/docs/steps/index.html
   steps:
+    - install-packages:
+        packages: git
     - script:
-        name: echo
+        name: clone firmware
         code: |
-          echo "hello world!"
+          git clone https://github.com/jackhumbert/qmk_firmware.git |
+          ln -s $WERCKER_SOURCE_DIR qmk_firmware/keyboards/ergodox/keymaps/target_keymap
+    - script:
+        name: build keymap
+        cwd: $WERCKER_SOURCE_DIR
+        code: |
+          make keyboard=ergodox keymap=target_keymap
+deploy:
+  steps:
+    - script:
+        name: put built hex file to bintray.
+        code: |
+          curl -T $WERCKER_SOURCE_DIR/ergodox_ez_target_keymap.hex -u$BINTRAY_USERNAME:$BINTRAY_APIKEY https://api.bintray.com/content/$BINTRAY_USERNAME/$BINTRAY_REPO/$BINTRAY_PACKAGE/$WERCKER_GIT_BRANCH-$WERCKER_GIT_COMMIT/ergodox.hex
+    - script:
+        name: publish uploaded hex file.
+        code: |
+          curl -X POST -u$BINTRAY_USERNAME:$BINTRAY_APIKEY https://api.bintray.com/content/$BINTRAY_USERNAME/$BINTRAY_REPO/$BINTRAY_PACKAGE/$WERCKER_GIT_BRANCH-$WERCKER_GIT_COMMIT/publish
