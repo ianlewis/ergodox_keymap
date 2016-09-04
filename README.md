@@ -12,16 +12,16 @@ and two supporting layers for media keys for PC and Mac.
 
 ## PC (Base) Layer
 
-![PC Layer](img/base-layer.png)
+![PC Layer](img/base-layout.png)
 
 ## PC Media Layer
 
-![PC Media Layer](img/media-layer.png)
+![PC Media Layer](img/media-layout.png)
 
 ## Mac OSX Layer
 
-![PC Layer](img/osx-layer.png)
+![PC Layer](img/osx-layout.png)
 
 ## Mac OSX Media Layer
 
-![PC Layer](img/osxmedia-layer.png)
+![PC Layer](img/osxmedia-layout.png)
