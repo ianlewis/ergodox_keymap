@@ -16,7 +16,7 @@ build:
     - script:
         name: clone firmware
         code: |
-          git clone https://github.com/jackhumbert/qmk_firmware.git |
+          git clone https://github.com/jackhumbert/qmk_firmware.git
           ln -s $WERCKER_SOURCE_DIR qmk_firmware/keyboards/ergodox/keymaps/target_keymap
     - script:
         name: build keymap
