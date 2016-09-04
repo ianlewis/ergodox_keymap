@@ -20,9 +20,8 @@ build:
           ln -s $WERCKER_SOURCE_DIR qmk_firmware/keyboards/ergodox/keymaps/target_keymap
     - script:
         name: build keymap
-        cwd: $WERCKER_SOURCE_DIR
+        cwd: $WERCKER_SOURCE_DIR/qmk_firmware
         code: |
-          cd qmk_firmware
           make keyboard=ergodox keymap=target_keymap
 deploy:
   steps:
