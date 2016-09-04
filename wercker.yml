@@ -25,6 +25,8 @@ build:
           make keyboard=ergodox keymap=target_keymap
 deploy:
   steps:
+    - install-packages:
+        packages: curl
     - script:
         name: put built hex file to bintray.
         code: |
