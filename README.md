@@ -1,5 +1,7 @@
 # ianlewis_ergodox
 
+[![wercker status](https://app.wercker.com/status/b813324efc29cca64167be95b620c71c/s/master "wercker status")](https://app.wercker.com/project/byKey/b813324efc29cca64167be95b620c71c)
+
 My Ergodox Keyboard Layout
 
 The Keyboard is defined in a normal Qwerty keyboard layout which is then mapped
