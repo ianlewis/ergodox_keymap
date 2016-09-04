@@ -1,6 +1,7 @@
 # ianlewis_ergodox
 
 [![wercker status](https://app.wercker.com/status/b813324efc29cca64167be95b620c71c/s/master "wercker status")](https://app.wercker.com/project/byKey/b813324efc29cca64167be95b620c71c)
+[ ![Download](https://api.bintray.com/packages/ianlewis/ergodox_layout/ergodox.hex/images/download.svg) ](https://bintray.com/ianlewis/ergodox_layout/ergodox.hex/_latestVersion)
 
 My Ergodox Keyboard Layout
 
