@@ -30,7 +30,7 @@ deploy:
     - script:
         name: put built hex file to bintray.
         code: |
-          curl -T $WERCKER_SOURCE_DIR/ergodox_ez_target_keymap.hex -u$BINTRAY_USERNAME:$BINTRAY_APIKEY https://api.bintray.com/content/$BINTRAY_USERNAME/$BINTRAY_REPO/$BINTRAY_PACKAGE/$WERCKER_GIT_BRANCH-$WERCKER_GIT_COMMIT/ergodox.hex
+          curl -T $WERCKER_SOURCE_DIR/qmk_firmware/ergodox_ez_target_keymap.hex -u$BINTRAY_USERNAME:$BINTRAY_APIKEY https://api.bintray.com/content/$BINTRAY_USERNAME/$BINTRAY_REPO/$BINTRAY_PACKAGE/$WERCKER_GIT_BRANCH-$WERCKER_GIT_COMMIT/ergodox.hex
     - script:
         name: publish uploaded hex file.
         code: |
