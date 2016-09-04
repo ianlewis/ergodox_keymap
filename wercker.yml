@@ -22,6 +22,7 @@ build:
         name: build keymap
         cwd: $WERCKER_SOURCE_DIR
         code: |
+          cd qmk_firmware
           make keyboard=ergodox keymap=target_keymap
 deploy:
   steps:
