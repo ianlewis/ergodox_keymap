@@ -1,12 +1,12 @@
-# ianlewis\_ergodox
+# ergodox\_keymap
 
 [![wercker status](https://app.wercker.com/status/b813324efc29cca64167be95b620c71c/s/master "wercker status")](https://app.wercker.com/project/byKey/b813324efc29cca64167be95b620c71c)
 [ ![Download](https://api.bintray.com/packages/ianlewis/ergodox_layout/ergodox.hex/images/download.svg) ](https://bintray.com/ianlewis/ergodox\_layout/ergodox.hex/\_latestVersion)
 
 My Ergodox Keyboard Layout
 
-The Keyboard is defined in a normal Qwerty keyboard layout which is then mapped
-to a JP keyboard style Dvorak layout in the software keyboard map on the OS.
+The Keyboard is defined in a Dvorak keyboard layout which corresponds to a U.S. English
+keyboard map in software.
 
 # Layers
 
