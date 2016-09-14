@@ -55,22 +55,22 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 0: Basic layer
  *
  * ,---------------------------------------------------.           ,---------------------------------------------------.
- * |   =    |   1  |   2   |   3  |   4  |   5  |      |           |      |   6  |   7  |   8  |   9   |   0  |   -    |
+ * |   =    |   1  |   2   |   3  |   4  |   5  |      |           |      |   6  |   7  |   8  |   9   |   0  |        |
  * |--------+------+-------+------+------+-------------|           |------+------+------+------+-------+------+--------|
  * | Tab    |   "  |   ,   |   .  |   P  |   Y  |  [   |           |  ]   |   Y  |   G  |   C  |   R   |   L  |   \    |
  * |--------+------+-------+------+------+------|      |           |      |------+------+------+-------+------+--------|
- * |Ctrl/Esc|   A  |   O   |   E  |   U  |   I  |------|           |------|   D  |   H  |   T  |   N   |   S  |'/MEDIA |
+ * |Ctrl/Esc|   A  |   O   |   E  |   U  |   I  |------|           |------|   D  |   H  |   T  |   N   |   S  |-/MEDIA |
  * |--------+------+-------+------+------+------|  (   |           |  )   |------+------+------+-------+------+--------|
  * | LShift |   ;  |   Q   |   J  |   K  |   X  |      |           |      |   B  |   M  |   W  |   V   |   Z  |   /    |
  * `--------+------+-------+------+------+-------------'           `-------------+------+------+-------+------+--------'
- *   | Cut  | Copy | Paste | Left | Right|                                       |  Up  | Down |AltLGui|   ~  | ~OSX |
+ *   | Cut  | Copy | Paste | Alt  | LGui |                                       |      |      |AltLGui|   ~  | ~OSX |
  *   `-----------------------------------'                                       `-----------------------------------'
  *                                        ,-------------.       ,---------------.
- *                                        | Alt  | LGui |       |      |        |
+ *                                        |      |      |       |      |        |
  *                                 ,------|------|------|       |------+--------+------.
- *                                 |      |      | Home |       | PgUp |        |      |
+ *                                 |      |      |      |       |      |        |      |
  *                                 | Back | Del  |------|       |------|  Enter |Space |
- *                                 | Space|      | End  |       | PgDn |        |      |
+ *                                 | Space|      |      |       |      |        |      |
  *                                 `--------------------'       `----------------------'
  */
 
@@ -89,19 +89,19 @@ ALT+SUPER is used for switching input language mode.
         KC_TAB,         KC_QUOT,    KC_COMM,        KC_DOT,     KC_P,       KC_Y,       KC_LBRC,
         CTL_T(KC_ESC),  KC_A,       KC_O,           KC_E,       KC_U,       KC_I,
         KC_LSFT,        KC_SCLN,    KC_Q,           KC_J,       KC_K,       KC_X,       KC_LPRN,
-        LCTL(KC_X),     LCTL(KC_C), LCTL(KC_V),     KC_LEFT,KC_RGHT,
-                                               KC_LALT,  KC_LGUI,
-                                                              KC_HOME,
-                                               KC_BSPC,KC_DELT,KC_END,
+        LCTL(KC_X),     LCTL(KC_C), LCTL(KC_V),     KC_LALT,    KC_LGUI,
+                                               KC_NO,  KC_NO,
+                                                              KC_NO,
+                                               KC_BSPC,KC_DELT,KC_NO,
         // right hand
         KC_NO,          M(KF_6),    M(KF_7),    M(KF_8),    M(KF_9),        M(KF_10),       M(KF_11),
         KC_RBRC,        KC_F,       KC_G,       KC_C,       KC_R,           KC_L,           KC_BSLS,
-                        KC_D,       KC_H,       KC_T,       KC_N,           KC_S,           LT(MEDIA, KC_QUOT),
+                        KC_D,       KC_H,       KC_T,       KC_N,           KC_S,           LT(MEDIA, KC_MINS),
         KC_RPRN,        KC_B,       KC_M,       KC_W,       KC_V,           KC_Z,           KC_SLSH,
-                                    KC_UP,      KC_DOWN,    LALT(KC_LGUI),  KC_GRV,         TO(OSX, 1),
+                                    KC_NO,      KC_NO,      LALT(KC_LGUI),  KC_GRV,         TO(OSX, 1),
         KC_NO,        KC_NO,
-        KC_PGUP,
-        KC_PGDN, KC_ENT, KC_SPC
+        KC_NO,
+        KC_NO, KC_ENT, KC_SPC
     ),
 
 /* Keymap 1: Media and mouse keys
@@ -109,11 +109,11 @@ ALT+SUPER is used for switching input language mode.
  * ,--------------------------------------------------.           ,--------------------------------------------------.
  * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
  * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
- * |        |      |      |  Up  |      |      |      |           |Scroll|      |MsUpL | MsUp |MnUpR |      |        |
+ * |        |      | Home |  Up  | PgUp |      |      |           |Scroll|      |MsUpL | MsUp |MnUpR |      |        |
  * |--------+------+------+------+------+------|      |           |Up    |------+------+------+------+------+--------|
  * |        |      | Left | Down | Right|      |------|           |------|      |MsLeft| MsDn |MsRght|      |        |
  * |--------+------+------+------+------+------|      |           |Scroll|------+------+------+------+------+--------|
- * |        |      |      | Down |      |      |      |           |Down  |      |MsDnL | MsDn |MsDnR |      |        |
+ * |        |      | End  | Down | PgDn |      |      |           |Down  |      |MsDnL | MsDn |MsDnR |      |        |
  * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
  *   |      |      |      |      |      |                                       |      |      |      |      |      |
  *   `----------------------------------'                                       `----------------------------------'
@@ -128,9 +128,9 @@ ALT+SUPER is used for switching input language mode.
 // MEDIA AND MOUSE
 [MEDIA] = KEYMAP(
        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-       KC_TRNS, KC_TRNS, KC_TRNS, KC_UP,   KC_TRNS, KC_TRNS, KC_TRNS,
+       KC_TRNS, KC_TRNS, KC_HOME, KC_UP,   KC_PGUP, KC_TRNS, KC_TRNS,
        KC_TRNS, KC_TRNS, KC_LEFT, KC_DOWN, KC_RGHT, KC_TRNS,
-       KC_TRNS, KC_TRNS, KC_TRNS, KC_DOWN, KC_TRNS, KC_TRNS, KC_TRNS,
+       KC_TRNS, KC_TRNS, KC_END,  KC_DOWN, KC_PGDN, KC_TRNS, KC_TRNS,
        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
                                            KC_TRNS, KC_MUTE,
                                                     KC_VOLU,
@@ -149,22 +149,22 @@ ALT+SUPER is used for switching input language mode.
 /* Keymap 2: MAC OSX layer
  *
  * ,---------------------------------------------------.           ,---------------------------------------------------.
- * |   =    |   1  |   2   |   3  |   4  |   5  |      |           |      |   6  |   7  |   8  |   9   |   0  |   -    |
+ * |   =    |   1  |   2   |   3  |   4  |   5  |      |           |      |   6  |   7  |   8  |   9   |   0  |        |
  * |--------+------+-------+------+------+-------------|           |------+------+------+------+-------+------+--------|
  * | Tab    |   "  |   ,   |   .  |   P  |   Y  |  [   |           |  ]   |   Y  |   G  |   C  |   R   |   L  |   \    |
  * |--------+------+-------+------+------+------|      |           |      |------+------+------+-------+------+--------|
- * |Ctrl/Esc|   A  |   O   |   E  |   U  |   I  |------|           |------|   D  |   H  |   T  |   N   |   S  |'/MEDIA |
+ * |Ctrl/Esc|   A  |   O   |   E  |   U  |   I  |------|           |------|   D  |   H  |   T  |   N   |   S  |-/MEDIA |
  * |--------+------+-------+------+------+------|  (   |           |  )   |------+------+------+-------+------+--------|
  * | LShift |   ;  |   Q   |   J  |   K  |   X  |      |           |      |   B  |   M  |   W  |   V   |   Z  |   /    |
  * `--------+------+-------+------+------+-------------'           `-------------+------+------+-------+------+--------'
- *   | Cut  | Copy | Paste | Left | Right|                                       |  Up  | Down |LGuiSPC|   ~  | ~PC  |
+ *   | Cut  | Copy | Paste | Alt  | LGui |                                       |      |      |LGuiSPC|   ~  | ~PC  |
  *   `-----------------------------------'                                       `-----------------------------------'
  *                                        ,-------------.       ,---------------.
- *                                        | Alt  | LGui |       |      |        |
+ *                                        |      |      |       |      |        |
  *                                 ,------|------|------|       |------+--------+------.
- *                                 |      |      | Home |       | PgUp |        |      |
+ *                                 |      |      |      |       |      |        |      |
  *                                 | Back | Del  |------|       |------|  Enter |Space |
- *                                 | Space|      | End  |       | PgDn |        |      |
+ *                                 | Space|      |      |       |      |        |      |
  *                                 `--------------------'       `----------------------'
  */
 
@@ -174,19 +174,19 @@ ALT+SUPER is used for switching input language mode.
         KC_TAB,         KC_QUOT,    KC_COMM,        KC_DOT,     KC_P,       KC_Y,       KC_LBRC,
         CTL_T(KC_ESC),  KC_A,       KC_O,           KC_E,       KC_U,       KC_I,
         KC_LSFT,        KC_SCLN,    KC_Q,           KC_J,       KC_K,       KC_X,       KC_LPRN,
-        LGUI(KC_X),     LGUI(KC_C), LGUI(KC_V),     KC_LEFT,    KC_RGHT,
-                                               KC_LALT,  KC_LGUI,
-                                                              KC_HOME,
-                                               KC_BSPC,KC_DELT,KC_END,
+        LGUI(KC_X),     LGUI(KC_C), LGUI(KC_V),     KC_LALT,    KC_LGUI,
+                                               KC_NO,  KC_NO,
+                                                              KC_NO,
+                                               KC_BSPC,KC_DELT,KC_NO,
         // right hand
         KC_NO,          M(KF_6),    M(KF_7),    M(KF_8),    M(KF_9),        M(KF_10),       M(KF_11),
         KC_RBRC,        KC_F,       KC_G,       KC_C,       KC_R,           KC_L,           KC_BSLS,
-                        KC_D,       KC_H,       KC_T,       KC_N,           KC_S,           LT(OSXMEDIA, KC_QUOT),
+                        KC_D,       KC_H,       KC_T,       KC_N,           KC_S,           LT(OSXMEDIA, KC_MINS),
         KC_RPRN,        KC_B,       KC_M,       KC_W,       KC_V,           KC_Z,           KC_SLSH,
-                                    KC_UP,      KC_DOWN,    LGUI(KC_SPC),   KC_GRV,         TO(BASE, 1),
+                                    KC_NO,      KC_NO,      LGUI(KC_SPC),   KC_GRV,         TO(BASE, 1),
         KC_NO,        KC_NO,
-        KC_PGUP,
-        KC_PGDN, KC_ENT, KC_SPC
+        KC_NO,
+        KC_NO, KC_ENT, KC_SPC
     ),
 
 /* Keymap 3: Media and mouse keys (MAC OSX)
@@ -194,11 +194,11 @@ ALT+SUPER is used for switching input language mode.
  * ,--------------------------------------------------.           ,--------------------------------------------------.
  * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
  * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
- * |        |      |      |  Up  |      |      |      |           |Scroll|      |MsUpL | MsUp |MnUpR |      |        |
+ * |        |      | Home |  Up  | PgUp |      |      |           |Scroll|      |MsUpL | MsUp |MnUpR |      |        |
  * |--------+------+------+------+------+------|      |           |Up    |------+------+------+------+------+--------|
  * |        |      | Left | Down | Right|      |------|           |------|      |MsLeft| MsDn |MsRght|      |        |
  * |--------+------+------+------+------+------|      |           |Scroll|------+------+------+------+------+--------|
- * |        |      |      | Down |      |      |      |           |Down  |      |MsDnL | MsDn |MsDnR |      |        |
+ * |        |      | End  | Down | PgDn |      |      |           |Down  |      |MsDnL | MsDn |MsDnR |      |        |
  * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
  *   |      |      |      |      |      |                                       |      |      |      |      |      |
  *   `----------------------------------'                                       `----------------------------------'
@@ -213,9 +213,9 @@ ALT+SUPER is used for switching input language mode.
 // MEDIA AND MOUSE for OSX
 [OSXMEDIA] = KEYMAP(
        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-       KC_TRNS, KC_TRNS, KC_TRNS, KC_UP,   KC_TRNS, KC_TRNS, KC_TRNS,
+       KC_TRNS, KC_TRNS, KC_HOME, KC_UP,   KC_PGUP, KC_TRNS, KC_TRNS,
        KC_TRNS, KC_TRNS, KC_LEFT, KC_DOWN, KC_RGHT, KC_TRNS,
-       KC_TRNS, KC_TRNS, KC_TRNS, KC_DOWN, KC_TRNS, KC_TRNS, KC_TRNS,
+       KC_TRNS, KC_TRNS, KC_END,  KC_DOWN, KC_PGDN, KC_TRNS, KC_TRNS,
        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
                                            KC_TRNS, KC_MUTE,
                                                     KC_VOLU,
@@ -246,7 +246,7 @@ void ang_handle_kf(keyrecord_t *record, uint8_t id) {
             kc = KC_F1 + code;
         } else {
           if (id == KF_11) {
-              kc = KC_MINS;
+              kc = KC_NO;
           } else {
               kc = KC_1 + code;
           }
