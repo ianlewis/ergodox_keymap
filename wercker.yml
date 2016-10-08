@@ -34,7 +34,7 @@ deploy:
     - script:
         name: publish uploaded hex file.
         code: |
-          curl --fail -X POST -u$BINTRAY_USERNAME:$BINTRAY_APIKEY https://api.bintray.com/content/$BINTRAY_USERNAME/$BINTRAY_REPO/$BINTRAY_PACKAGE/$WERCKER_GIT_BRANCH-$WERCKER_GIT_COMMIT/publish
+          curl --fail -X POST -H "Content-Type: application/json" -d'{"publish_wait_for_secs": -1}' -u$BINTRAY_USERNAME:$BINTRAY_APIKEY https://api.bintray.com/content/$BINTRAY_USERNAME/$BINTRAY_REPO/$BINTRAY_PACKAGE/$WERCKER_GIT_BRANCH-$WERCKER_GIT_COMMIT/publish
     - script:
         name: add file to download list.
         code: |
