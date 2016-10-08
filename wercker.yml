@@ -28,9 +28,13 @@ deploy:
     - install-packages:
         packages: curl
     - script:
-        name: publish built hex file to bintray.
+        name: upload built hex file to bintray.
         code: |
-          curl --fail -T $WERCKER_SOURCE_DIR/qmk_firmware/ergodox_ez_target_keymap.hex -H "X-Bintray-Publish: 1" -u$BINTRAY_USERNAME:$BINTRAY_APIKEY https://api.bintray.com/content/$BINTRAY_USERNAME/$BINTRAY_REPO/$BINTRAY_PACKAGE/$WERCKER_GIT_BRANCH-$WERCKER_GIT_COMMIT/ergodox.hex
+          curl --fail -T $WERCKER_SOURCE_DIR/qmk_firmware/ergodox_ez_target_keymap.hex -u$BINTRAY_USERNAME:$BINTRAY_APIKEY https://api.bintray.com/content/$BINTRAY_USERNAME/$BINTRAY_REPO/$BINTRAY_PACKAGE/$WERCKER_GIT_BRANCH-$WERCKER_GIT_COMMIT/ergodox.hex
+    - script:
+        name: publish uploaded hex file.
+        code: |
+          curl --fail -X POST -u$BINTRAY_USERNAME:$BINTRAY_APIKEY https://api.bintray.com/content/$BINTRAY_USERNAME/$BINTRAY_REPO/$BINTRAY_PACKAGE/$WERCKER_GIT_BRANCH-$WERCKER_GIT_COMMIT/publish
     - script:
         name: add file to download list.
         code: |
