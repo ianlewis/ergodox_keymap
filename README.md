@@ -13,6 +13,8 @@ keyboard map in software.
 The keyboard layout is organized in four layers. Two main layers for PC and Mac
 and two supporting layers for media keys for PC and Mac.
 
+*Images are created using the [Keyboard Layout Editor](http://www.keyboard-layout-editor.com/)*
+
 ## PC (Base) Layer
 
 ![PC Layer](img/base-layout.png)
