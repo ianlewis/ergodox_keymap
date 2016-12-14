@@ -26,8 +26,6 @@ limitations under the License.
 #define OSX         2 // Mac OSX layer
 #define OSXMEDIA    3 // Mac OSX media layer
 
-uint16_t kf_timers[12];
-
 enum {
   KF_VERSION,
 
@@ -85,7 +83,7 @@ ALT+SUPER is used for switching input language mode.
         KC_RBRC,        KC_F,       KC_G,           KC_C,       KC_R,       KC_L,       KC_BSLS,
                         KC_D,       KC_H,           KC_T,       KC_N,       KC_S,       LT(MEDIA, KC_MINS),
         KC_RPRN,        KC_B,       KC_M,           KC_W,       KC_V,       KC_Z,       KC_SLSH,
-                                    LALT(KC_LGUI),  KC_NO,      KC_NO,      KC_NO,      TO(OSX, 1),
+                                    LALT(KC_LGUI),  KC_NO,      KC_NO,      KC_NO,      TO(OSX),
         KC_NO,          KC_NO,
         KC_NO,
         KC_NO,          KC_ENT,     KC_SPC
@@ -170,7 +168,7 @@ ALT+SUPER is used for switching input language mode.
         KC_RBRC,    KC_F,       KC_G,           KC_C,       KC_R,       KC_L,       KC_BSLS,
                     KC_D,       KC_H,           KC_T,       KC_N,       KC_S,       LT(OSXMEDIA, KC_MINS),
         KC_RPRN,    KC_B,       KC_M,           KC_W,       KC_V,       KC_Z,       KC_SLSH,
-                                LGUI(KC_SPC),   KC_NO,      KC_NO,      KC_NO,      TO(BASE, 1),
+                                LGUI(KC_SPC),   KC_NO,      KC_NO,      KC_NO,      TO(BASE),
         KC_NO,      KC_NO,
         KC_NO,
         KC_NO,      KC_ENT,     KC_SPC
