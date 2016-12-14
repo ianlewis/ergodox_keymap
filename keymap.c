@@ -31,19 +31,6 @@ uint16_t kf_timers[12];
 enum {
   KF_VERSION,
 
-  // Function / number keys
-  KF_1,     // 1, F1
-  KF_2,     // 2, F2
-  KF_3,     // ...
-  KF_4,
-  KF_5,
-  KF_6,
-  KF_7,
-  KF_8,
-  KF_9,
-  KF_10,
-  KF_11,    // -, F11
-       
   // Diagonal mouse movement
   A_MUL,
   A_MUR,
@@ -85,29 +72,29 @@ ALT+SUPER is used for switching input language mode.
 // Otherwise, it needs KC_*
 [BASE] = KEYMAP(  // layer 0 : default
         // left hand
-        KC_EQL,         M(KF_1),    M(KF_2),        M(KF_3),    M(KF_4),    M(KF_5),    KC_NO,
+        KC_EQL,         KC_1,       KC_2,           KC_3,       KC_4,       KC_5,       KC_NO,
         KC_TAB,         KC_QUOT,    KC_COMM,        KC_DOT,     KC_P,       KC_Y,       KC_LBRC,
         CTL_T(KC_ESC),  KC_A,       KC_O,           KC_E,       KC_U,       KC_I,
         KC_LSFT,        KC_SCLN,    KC_Q,           KC_J,       KC_K,       KC_X,       KC_LPRN,
         LCTL(KC_X),     LCTL(KC_C), LCTL(KC_V),     KC_LALT,    KC_LGUI,
-                                               KC_NO,  KC_NO,
-                                                              KC_NO,
-                                               KC_BSPC,KC_DELT,KC_NO,
+                                                                            KC_NO,      KC_NO,
+                                                                                        KC_NO,
+                                                                KC_BSPC,    KC_DELT,    KC_NO,
         // right hand
-        KC_NO,          M(KF_6),    M(KF_7),        M(KF_8),    M(KF_9),        M(KF_10),       M(KF_11),
-        KC_RBRC,        KC_F,       KC_G,           KC_C,       KC_R,           KC_L,           KC_BSLS,
-                        KC_D,       KC_H,           KC_T,       KC_N,           KC_S,           LT(MEDIA, KC_MINS),
-        KC_RPRN,        KC_B,       KC_M,           KC_W,       KC_V,           KC_Z,           KC_SLSH,
-                                    LALT(KC_LGUI),  KC_NO,      KC_NO,          KC_NO,          TO(OSX, 1),
-        KC_NO,        KC_NO,
+        KC_NO,          KC_6,       KC_7,           KC_8,       KC_9,       KC_10,      KC_GRV,
+        KC_RBRC,        KC_F,       KC_G,           KC_C,       KC_R,       KC_L,       KC_BSLS,
+                        KC_D,       KC_H,           KC_T,       KC_N,       KC_S,       LT(MEDIA, KC_MINS),
+        KC_RPRN,        KC_B,       KC_M,           KC_W,       KC_V,       KC_Z,       KC_SLSH,
+                                    LALT(KC_LGUI),  KC_NO,      KC_NO,      KC_NO,      TO(OSX, 1),
+        KC_NO,          KC_NO,
         KC_NO,
-        KC_NO, KC_ENT, KC_SPC
+        KC_NO,          KC_ENT,     KC_SPC
     ),
 
 /* Keymap 1: Media and mouse keys
  *
  * ,--------------------------------------------------.           ,--------------------------------------------------.
- * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
+ * |        |  F1  |  F2  |  F3  |  F4  |  F5  |      |           |      |  F6  |  F7  |  F8  |  F9  |  F10 |  F11   |
  * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
  * |        |      | Home |  Up  | PgUp |      |      |           |Scroll|      |MsUpL | MsUp |MnUpR |      |        |
  * |--------+------+------+------+------+------|      |           |Up    |------+------+------+------+------+--------|
@@ -127,23 +114,23 @@ ALT+SUPER is used for switching input language mode.
  */
 // MEDIA AND MOUSE
 [MEDIA] = KEYMAP(
-       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-       KC_TRNS, KC_TRNS, KC_HOME, KC_UP,   KC_PGUP, KC_TRNS, KC_TRNS,
-       KC_TRNS, KC_TRNS, KC_LEFT, KC_DOWN, KC_RGHT, KC_TRNS,
-       KC_TRNS, KC_TRNS, KC_END,  KC_DOWN, KC_PGDN, KC_TRNS, KC_TRNS,
-       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-                                           KC_TRNS, KC_MUTE,
-                                                    KC_VOLU,
-                                  KC_MPLY, KC_MSTP, KC_VOLD,
+       KC_TRNS, KC_F1,      KC_F2,      KC_F3,      KC_F4,      KC_F5,      KC_TRNS,
+       KC_TRNS, KC_TRNS,    KC_HOME,    KC_UP,      KC_PGUP,    KC_TRNS,    KC_TRNS,
+       KC_TRNS, KC_TRNS,    KC_LEFT,    KC_DOWN,    KC_RGHT,    KC_TRNS,
+       KC_TRNS, KC_TRNS,    KC_END,     KC_DOWN,    KC_PGDN,    KC_TRNS,    KC_TRNS,
+       KC_TRNS, KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,
+                                                                KC_TRNS,    KC_MUTE,
+                                                                KC_VOLU,
+                                                    KC_MPLY,    KC_MSTP,    KC_VOLD,
        // right hand
-       KC_TRNS,  KC_TRNS, KC_TRNS,  KC_TRNS, KC_TRNS,  KC_TRNS, KC_TRNS,
-       KC_WH_U,  KC_TRNS, M(A_MUL), KC_MS_U, M(A_MUR), KC_TRNS, KC_TRNS,
-                 KC_TRNS, KC_MS_L,  KC_MS_D, KC_MS_R,  KC_TRNS, KC_TRNS,
-       KC_WH_D,  KC_TRNS, M(A_MDL), KC_MS_D, M(A_MDR), KC_TRNS, KC_TRNS,
-                          KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+       KC_TRNS, KC_F6,      KC_F7,      KC_F8,      KC_F9,      KC_F10,     KC_F11,
+       KC_WH_U, KC_TRNS,    M(A_MUL),   KC_MS_U,    M(A_MUR),   KC_TRNS,    KC_TRNS,
+                KC_TRNS,    KC_MS_L,    KC_MS_D,    KC_MS_R,    KC_TRNS,    KC_TRNS,
+       KC_WH_D, KC_TRNS,    M(A_MDL),   KC_MS_D,    M(A_MDR),   KC_TRNS,    KC_TRNS,
+                            KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,
        KC_MPRV, KC_MNXT,
        KC_TRNS,
-       KC_TRNS, KC_BTN1, KC_BTN2
+       KC_TRNS, KC_BTN1,    KC_BTN2
 ),
 
 /* Keymap 2: MAC OSX layer
@@ -170,29 +157,29 @@ ALT+SUPER is used for switching input language mode.
 
 [OSX] = KEYMAP(  // layer 0 : default
         // left hand
-        KC_EQL,         M(KF_1),    M(KF_2),        M(KF_3),    M(KF_4),    M(KF_5),    KC_NO,
+        KC_EQL,         KC_1,       KC_2,           KC_3,       KC_4,       KC_5,       KC_NO,
         KC_TAB,         KC_QUOT,    KC_COMM,        KC_DOT,     KC_P,       KC_Y,       KC_LBRC,
         CTL_T(KC_ESC),  KC_A,       KC_O,           KC_E,       KC_U,       KC_I,
         KC_LSFT,        KC_SCLN,    KC_Q,           KC_J,       KC_K,       KC_X,       KC_LPRN,
         LGUI(KC_X),     LGUI(KC_C), LGUI(KC_V),     KC_LALT,    KC_LGUI,
-                                               KC_NO,  KC_NO,
-                                                              KC_NO,
-                                               KC_BSPC,KC_DELT,KC_NO,
+                                                                            KC_NO,      KC_NO,
+                                                                                        KC_NO,
+                                                                KC_BSPC,    KC_DELT,    KC_NO,
         // right hand
-        KC_NO,          M(KF_6),    M(KF_7),        M(KF_8),    M(KF_9),    M(KF_10),   M(KF_11),
-        KC_RBRC,        KC_F,       KC_G,           KC_C,       KC_R,       KC_L,       KC_BSLS,
-                        KC_D,       KC_H,           KC_T,       KC_N,       KC_S,       LT(OSXMEDIA, KC_MINS),
-        KC_RPRN,        KC_B,       KC_M,           KC_W,       KC_V,       KC_Z,       KC_SLSH,
-                                    LGUI(KC_SPC),   KC_NO,      KC_NO,      KC_NO,      TO(BASE, 1),
-        KC_NO,        KC_NO,
+        KC_NO,      KC_6,       KC_7,           KC_8,       KC_9,       KC_10,      KC_GRV,
+        KC_RBRC,    KC_F,       KC_G,           KC_C,       KC_R,       KC_L,       KC_BSLS,
+                    KC_D,       KC_H,           KC_T,       KC_N,       KC_S,       LT(OSXMEDIA, KC_MINS),
+        KC_RPRN,    KC_B,       KC_M,           KC_W,       KC_V,       KC_Z,       KC_SLSH,
+                                LGUI(KC_SPC),   KC_NO,      KC_NO,      KC_NO,      TO(BASE, 1),
+        KC_NO,      KC_NO,
         KC_NO,
-        KC_NO, KC_ENT, KC_SPC
+        KC_NO,      KC_ENT,     KC_SPC
     ),
 
 /* Keymap 3: Media and mouse keys (MAC OSX)
  *
  * ,--------------------------------------------------.           ,--------------------------------------------------.
- * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
+ * |        |  F1  |  F2  |  F3  |  F4  |  F5  |      |           |      |  F6  |  F7  |  F8  |  F9  |  F10 |  F11   |
  * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
  * |        |      | Home |  Up  | PgUp |      |      |           |Scroll|      |MsUpL | MsUp |MnUpR |      |        |
  * |--------+------+------+------+------+------|      |           |Up    |------+------+------+------+------+--------|
@@ -212,50 +199,26 @@ ALT+SUPER is used for switching input language mode.
  */
 // MEDIA AND MOUSE for OSX
 [OSXMEDIA] = KEYMAP(
-       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-       KC_TRNS, KC_TRNS, KC_HOME, KC_UP,   KC_PGUP, KC_TRNS, KC_TRNS,
-       KC_TRNS, KC_TRNS, KC_LEFT, KC_DOWN, KC_RGHT, KC_TRNS,
-       KC_TRNS, KC_TRNS, KC_END,  KC_DOWN, KC_PGDN, KC_TRNS, KC_TRNS,
-       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-                                           KC_TRNS, KC_MUTE,
-                                                    KC_VOLU,
-                                  KC_MPLY, KC_MSTP, KC_VOLD,
+       KC_TRNS, KC_F1,      KC_F2,      KC_F3,      KC_F4,      KC_F5,      KC_TRNS,
+       KC_TRNS, KC_TRNS,    KC_HOME,    KC_UP,      KC_PGUP,    KC_TRNS,    KC_TRNS,
+       KC_TRNS, KC_TRNS,    KC_LEFT,    KC_DOWN,    KC_RGHT,    KC_TRNS,
+       KC_TRNS, KC_TRNS,    KC_END,     KC_DOWN,    KC_PGDN,    KC_TRNS,    KC_TRNS,
+       KC_TRNS, KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,
+                                                                KC_TRNS,    KC_MUTE,
+                                                                            KC_VOLU,
+                                                    KC_MPLY,    KC_MSTP,    KC_VOLD,
        // right hand
-       KC_TRNS,  KC_TRNS, KC_TRNS,  KC_TRNS, KC_TRNS,  KC_TRNS, KC_TRNS,
-       KC_WH_U,  KC_TRNS, M(A_MUL), KC_MS_U, M(A_MUR), KC_TRNS, KC_TRNS,
-                 KC_TRNS, KC_MS_L,  KC_MS_D, KC_MS_R,  KC_TRNS, KC_TRNS,
-       KC_WH_D,  KC_TRNS, M(A_MDL), KC_MS_D, M(A_MDR), KC_TRNS, KC_TRNS,
-                          KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+       KC_TRNS, KC_F6,      KC_F7,      KC_F8,      KC_F9,      KC_F10,     KC_F11,
+       KC_WH_U, KC_TRNS,    M(A_MUL),   KC_MS_U,    M(A_MUR),   KC_TRNS,    KC_TRNS,
+                KC_TRNS,    KC_MS_L,    KC_MS_D,    KC_MS_R,    KC_TRNS,    KC_TRNS,
+       KC_WH_D, KC_TRNS,    M(A_MDL),   KC_MS_D,    M(A_MDR),   KC_TRNS,    KC_TRNS,
+                            KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,
        KC_MPRV, KC_MNXT,
        KC_TRNS,
-       KC_TRNS, KC_BTN1, KC_BTN2
+       KC_TRNS, KC_BTN1,    KC_BTN2
 ),
 
 };
-
-void ang_handle_kf(keyrecord_t *record, uint8_t id) {
-    uint8_t code = id - KF_1;
-
-    if (record->event.pressed) {
-        kf_timers[code] = timer_read();
-    } else {
-        uint8_t kc;
-    
-        if (timer_elapsed(kf_timers[code]) > TAPPING_TERM) {
-            // Long press
-            kc = KC_F1 + code;
-        } else {
-          if (id == KF_11) {
-              kc = KC_GRV;
-          } else {
-              kc = KC_1 + code;
-          }
-        }
-    
-        register_code (kc);
-        unregister_code (kc);
-    }
-}
 
 const uint16_t PROGMEM fn_actions[] = {
 };
@@ -267,9 +230,6 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt) {
             if (record->event.pressed) {
                 SEND_STRING (QMK_KEYBOARD "/" QMK_KEYMAP " @ " QMK_VERSION);
             }
-            break;
-        case KF_1 ... KF_11:
-            ang_handle_kf(record, id);
             break;
         /* Mouse movement */
         case A_MUL:
