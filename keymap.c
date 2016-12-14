@@ -79,7 +79,7 @@ ALT+SUPER is used for switching input language mode.
                                                                                         KC_NO,
                                                                 KC_BSPC,    KC_DELT,    KC_NO,
         // right hand
-        KC_NO,          KC_6,       KC_7,           KC_8,       KC_9,       KC_10,      KC_GRV,
+        KC_NO,          KC_6,       KC_7,           KC_8,       KC_9,       KC_0,       KC_GRV,
         KC_RBRC,        KC_F,       KC_G,           KC_C,       KC_R,       KC_L,       KC_BSLS,
                         KC_D,       KC_H,           KC_T,       KC_N,       KC_S,       LT(MEDIA, KC_MINS),
         KC_RPRN,        KC_B,       KC_M,           KC_W,       KC_V,       KC_Z,       KC_SLSH,
@@ -164,7 +164,7 @@ ALT+SUPER is used for switching input language mode.
                                                                                         KC_NO,
                                                                 KC_BSPC,    KC_DELT,    KC_NO,
         // right hand
-        KC_NO,      KC_6,       KC_7,           KC_8,       KC_9,       KC_10,      KC_GRV,
+        KC_NO,      KC_6,       KC_7,           KC_8,       KC_9,       KC_0,       KC_GRV,
         KC_RBRC,    KC_F,       KC_G,           KC_C,       KC_R,       KC_L,       KC_BSLS,
                     KC_D,       KC_H,           KC_T,       KC_N,       KC_S,       LT(OSXMEDIA, KC_MINS),
         KC_RPRN,    KC_B,       KC_M,           KC_W,       KC_V,       KC_Z,       KC_SLSH,
