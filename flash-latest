@@ -5,6 +5,8 @@
 
 LATEST_VER=$(curl -s https://api.bintray.com/packages/${BINTRAY_USERNAME}/${BINTRAY_REPO}/${BINTRAY_PACKAGE} | jq '.versions[0]' | tr -d '"')
 echo "Latest is ${LATEST_VER}"
-TMPFILE=$(mktemp --suffix=.hex)
-curl -o ${TMPFILE} https://dl.bintray.com/${BINTRAY_USERNAME}/${BINTRAY_REPO}/${LATEST_VER}/ergodox.hex
-teensy_loader_cli -mmcu=atmega32u4 -w -v $TMPFILE
+TMPFILE=$(mktemp)
+mv ${TMPFILE} ${TMPFILE}.hex
+curl -o ${TMPFILE}.hex https://dl.bintray.com/${BINTRAY_USERNAME}/${BINTRAY_REPO}/${LATEST_VER}/ergodox.hex
+teensy_loader_cli -mmcu=atmega32u4 -w -v ${TMPFILE}.hex
+rm ${TMPFILE}.hex
