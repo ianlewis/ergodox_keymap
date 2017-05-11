@@ -48,7 +48,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+-------+------+------+------|  (   |           |  )   |------+-------+------+------+------+--------|
  * | LShift |   ;  |   Q   |   J  |   K  |   X  |      |           |      |   B  |   M   |   W  |   V  |   Z  |   /    |
  * `--------+------+-------+------+------+-------------'           `-------------+-------+------+------+------+--------'
- *   | Cut  | Copy | Paste | Alt  | LGui |                                       |AltLGui|      |      |      | ~OSX |
+ *   | Cut  | Copy | Paste | Alt  | LGui |                                       |AltSPC |      |      |      | ~OSX |
  *   `-----------------------------------'                                       `-----------------------------------'
  *                                        ,-------------.       ,---------------.
  *                                        |      |      |       |      |        |
@@ -83,7 +83,7 @@ ALT+SUPER is used for switching input language mode.
         KC_RBRC,        KC_F,       KC_G,           KC_C,       KC_R,       KC_L,       KC_BSLS,
                         KC_D,       KC_H,           KC_T,       KC_N,       KC_S,       LT(MEDIA, KC_MINS),
         KC_RPRN,        KC_B,       KC_M,           KC_W,       KC_V,       KC_Z,       KC_SLSH,
-                                    LALT(KC_LGUI),  KC_NO,      KC_NO,      KC_NO,      TO(OSX),
+                                    LALT(KC_SPC),   KC_NO,      KC_NO,      KC_NO,      TO(OSX),
         KC_NO,          KC_NO,
         KC_NO,
         KC_NO,          KC_ENT,     KC_SPC
