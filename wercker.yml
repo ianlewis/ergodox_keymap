@@ -18,13 +18,13 @@ build:
         code: |
           git clone https://github.com/jackhumbert/qmk_firmware.git
           cd qmk_firmware
-          git reset --hard 0.5.133
-          ln -s $WERCKER_SOURCE_DIR keyboards/ergodox_ez/keymaps/target_keymap
+          git reset --hard 0.5.45
+          ln -s $WERCKER_SOURCE_DIR keyboards/ergodox/ez/keymaps/target_keymap
     - script:
         name: build keymap
         cwd: $WERCKER_SOURCE_DIR/qmk_firmware
         code: |
-          make ergodox_ez-target_keymap
+          make ergodox-ez-target_keymap
 deploy:
   steps:
     - install-packages:
