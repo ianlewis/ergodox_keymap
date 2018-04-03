@@ -94,11 +94,11 @@ ALT+SUPER is used for switching input language mode.
  * ,--------------------------------------------------.           ,--------------------------------------------------.
  * |        |  F1  |  F2  |  F3  |  F4  |  F5  |      |           |      |  F6  |  F7  |  F8  |  F9  |  F10 |  F11   |
  * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
- * |        |      | Home |  Up  | PgUp |      |      |           |Scroll|      |MsUpL | MsUp |MnUpR |      |        |
- * |--------+------+------+------+------+------|      |           |Up    |------+------+------+------+------+--------|
- * |        |      | Left | Down | Right|      |------|           |------|      |MsLeft| MsDn |MsRght|      |        |
- * |--------+------+------+------+------+------|      |           |Scroll|------+------+------+------+------+--------|
- * |        |      | End  | Down | PgDn |      |      |           |Down  |      |MsDnL | MsDn |MsDnR |      |        |
+ * |        |      | Home |  Up  | PgUp |      |WWW   |           |WWW   |ScrlUp| MsUp |MnUpR |      |        |
+ * |--------+------+------+------+------+------|Back  |           |Forwd |------+------+------+------+------+--------|
+ * |        |      | Left | Down | Right|      |------|           |------|ScrlDn|MsLeft| MsDn |MsRght|      |        |
+ * |--------+------+------+------+------+------|WWW   |           |WWW   |------+------+------+------+------+--------|
+ * |        |      | End  | Down | PgDn |      |Search|           |Home  |      |MsDnL | MsDn |MsDnR |      |        |
  * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
  *   |      |      |      |      |      |                                       |      |      |      |      |      |
  *   `----------------------------------'                                       `----------------------------------'
@@ -113,18 +113,18 @@ ALT+SUPER is used for switching input language mode.
 // MEDIA AND MOUSE
 [MEDIA] = KEYMAP(
        KC_TRNS, KC_F1,      KC_F2,      KC_F3,      KC_F4,      KC_F5,      KC_TRNS,
-       KC_TRNS, KC_TRNS,    KC_HOME,    KC_UP,      KC_PGUP,    KC_TRNS,    KC_TRNS,
+       KC_TRNS, KC_TRNS,    KC_HOME,    KC_UP,      KC_PGUP,    KC_TRNS,    KC_WBAK,
        KC_TRNS, KC_TRNS,    KC_LEFT,    KC_DOWN,    KC_RGHT,    KC_TRNS,
-       KC_TRNS, KC_TRNS,    KC_END,     KC_DOWN,    KC_PGDN,    KC_TRNS,    KC_TRNS,
+       KC_TRNS, KC_TRNS,    KC_END,     KC_DOWN,    KC_PGDN,    KC_TRNS,    KC_WSCH,
        KC_TRNS, KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,
                                                                 KC_TRNS,    KC_MUTE,
                                                                 KC_VOLU,
                                                     KC_MPLY,    KC_MSTP,    KC_VOLD,
        // right hand
        KC_TRNS, KC_F6,      KC_F7,      KC_F8,      KC_F9,      KC_F10,     KC_F11,
-       KC_WH_U, KC_TRNS,    M(A_MUL),   KC_MS_U,    M(A_MUR),   KC_TRNS,    KC_TRNS,
-                KC_TRNS,    KC_MS_L,    KC_MS_D,    KC_MS_R,    KC_TRNS,    KC_TRNS,
-       KC_WH_D, KC_TRNS,    M(A_MDL),   KC_MS_D,    M(A_MDR),   KC_TRNS,    KC_TRNS,
+       KC_WFWD, KC_WH_U,    M(A_MUL),   KC_MS_U,    M(A_MUR),   KC_TRNS,    KC_TRNS,
+                KC_WH_D,    KC_MS_L,    KC_MS_D,    KC_MS_R,    KC_TRNS,    KC_TRNS,
+       KC_WHOM, KC_TRNS,    M(A_MDL),   KC_MS_D,    M(A_MDR),   KC_TRNS,    KC_TRNS,
                             KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,
        KC_MPRV, KC_MNXT,
        KC_TRNS,
@@ -179,11 +179,11 @@ ALT+SUPER is used for switching input language mode.
  * ,--------------------------------------------------.           ,--------------------------------------------------.
  * |        |  F1  |  F2  |  F3  |  F4  |  F5  |      |           |      |  F6  |  F7  |  F8  |  F9  |  F10 |  F11   |
  * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
- * |        |      | Home |  Up  | PgUp |      |      |           |Scroll|      |MsUpL | MsUp |MnUpR |      |        |
- * |--------+------+------+------+------+------|      |           |Up    |------+------+------+------+------+--------|
- * |        |      | Left | Down | Right|      |------|           |------|      |MsLeft| MsDn |MsRght|      |        |
- * |--------+------+------+------+------+------|      |           |Scroll|------+------+------+------+------+--------|
- * |        |      | End  | Down | PgDn |      |      |           |Down  |      |MsDnL | MsDn |MsDnR |      |        |
+ * |        |      | Home |  Up  | PgUp |      |WWW   |           |WWW   |ScrlUp|MsUpL | MsUp |MnUpR |      |        |
+ * |--------+------+------+------+------+------|Back  |           |Forwd |------+------+------+------+------+--------|
+ * |        |      | Left | Down | Right|      |------|           |------|ScrlDn|MsLeft| MsDn |MsRght|      |        |
+ * |--------+------+------+------+------+------|WWW   |           |WWW   |------+------+------+------+------+--------|
+ * |        |      | End  | Down | PgDn |      |Search|           |Home  |      |MsDnL | MsDn |MsDnR |      |        |
  * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
  *   |      |      |      |      |      |                                       |      |      |      |      |      |
  *   `----------------------------------'                                       `----------------------------------'
@@ -198,18 +198,18 @@ ALT+SUPER is used for switching input language mode.
 // MEDIA AND MOUSE for OSX
 [OSXMEDIA] = KEYMAP(
        KC_TRNS, KC_F1,      KC_F2,      KC_F3,      KC_F4,      KC_F5,      KC_TRNS,
-       KC_TRNS, KC_TRNS,    KC_HOME,    KC_UP,      KC_PGUP,    KC_TRNS,    KC_TRNS,
+       KC_TRNS, KC_TRNS,    KC_HOME,    KC_UP,      KC_PGUP,    KC_TRNS,    KC_WBAK,
        KC_TRNS, KC_TRNS,    KC_LEFT,    KC_DOWN,    KC_RGHT,    KC_TRNS,
-       KC_TRNS, KC_TRNS,    KC_END,     KC_DOWN,    KC_PGDN,    KC_TRNS,    KC_TRNS,
+       KC_TRNS, KC_TRNS,    KC_END,     KC_DOWN,    KC_PGDN,    KC_TRNS,    KC_WSCH,
        KC_TRNS, KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,
                                                                 KC_TRNS,    KC_MUTE,
                                                                             KC_VOLU,
                                                     KC_MPLY,    KC_MSTP,    KC_VOLD,
        // right hand
        KC_TRNS, KC_F6,      KC_F7,      KC_F8,      KC_F9,      KC_F10,     KC_F11,
-       KC_WH_U, KC_TRNS,    M(A_MUL),   KC_MS_U,    M(A_MUR),   KC_TRNS,    KC_TRNS,
-                KC_TRNS,    KC_MS_L,    KC_MS_D,    KC_MS_R,    KC_TRNS,    KC_TRNS,
-       KC_WH_D, KC_TRNS,    M(A_MDL),   KC_MS_D,    M(A_MDR),   KC_TRNS,    KC_TRNS,
+       KC_WFWD, KC_WH_U,    M(A_MUL),   KC_MS_U,    M(A_MUR),   KC_TRNS,    KC_TRNS,
+                KC_WH_D,    KC_MS_L,    KC_MS_D,    KC_MS_R,    KC_TRNS,    KC_TRNS,
+       KC_WHOM, KC_TRNS,    M(A_MDL),   KC_MS_D,    M(A_MDR),   KC_TRNS,    KC_TRNS,
                             KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,
        KC_MPRV, KC_MNXT,
        KC_TRNS,
