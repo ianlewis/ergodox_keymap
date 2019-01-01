@@ -40,7 +40,7 @@ create a link to this repository.
 ```shell
 $ git clone https://github.com/jackhumbert/qmk_firmware.git
 $ cd qmk_firmware
-$ ls -s /path/to/ergodox_layout keyboards/ergodox/keymaps/mykeymap
+$ ln -s /path/to/ergodox_layout keyboards/ergodox/keymaps/mykeymap
 ```
 
 Then you can build the keymap hex file.
