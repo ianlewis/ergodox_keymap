@@ -31,3 +31,7 @@
 # Debug files
 *.dSYM/
 *.su
+
+# Third party and vendor
+third_party/
+vendor/
