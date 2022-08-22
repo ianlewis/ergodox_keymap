@@ -22,12 +22,12 @@ $(QMK_HOME):
 	mkdir -p $$(dirname $(QMK_HOME))
 	qmk setup -y -H $(QMK_HOME) -b firmware21 zsa/qmk_firmware
 
-$(QMK_HOME)/keyboards/moonlander/keymaps/dvorak_ianlewis: $(QMK_HOME)
-	mkdir -p $@
-	cp -r ./moonlander/* $@/
+$(QMK_HOME)/keyboards/moonlander/keymaps/dvorak_ianlewis/%: $(QMK_HOME)/keyboards/moonlander/keymaps/dvorak_ianlewis ./moonlander/%
+	mkdir -p $$(dirname $@)
+	cp -r ./moonlander/$* $@
 
-$(QMK_HOME)/moonlander_dvorak_ianlewis.bin: $(QMK_HOME)/keyboards/moonlander/keymaps/dvorak_ianlewis
-	cd $<
+$(QMK_HOME)/moonlander_dvorak_ianlewis.bin: $(QMK_HOME)/keyboards/moonlander/keymaps/dvorak_ianlewis/keymap.c $(QMK_HOME)/keyboards/moonlander/keymaps/dvorak_ianlewis/config.h $(QMK_HOME)/keyboards/moonlander/keymaps/dvorak_ianlewis/rules.mk
+	cd $$(dirname $<)
 	qmk compile -kb moonlander -km dvorak_ianlewis
 
 .PHONY: moonlander-compile
