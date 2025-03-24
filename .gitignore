@@ -1,3 +1,17 @@
+# For markdownlint
+.git/
+
+# Dependency directories (remove the comment below to include it)
+third_party/
+node_modules/
+.venv/
+
+# SARIF files
+*.sarif.json
+
+# qmk config
+qmk.ini
+
 # Object files
 *.o
 *.ko
@@ -32,6 +46,3 @@
 *.dSYM/
 *.su
 
-# Third party and vendor
-third_party/
-vendor/
