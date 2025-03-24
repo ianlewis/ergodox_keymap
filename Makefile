@@ -16,7 +16,6 @@ SHELL := /bin/bash
 OUTPUT_FORMAT ?= $(shell if [ "${GITHUB_ACTIONS}" == "true" ]; then echo "github"; else echo ""; fi)
 REPO_NAME = $(shell basename "$$(pwd)")
 REPO_ROOT := $(shell echo $$(pwd))
-QMK_HOME := $(shell echo $$(pwd)/third_party/qmk_firmware)
 
 # The help command prints targets in groups. Help documentation in the Makefile
 # uses comments with double hash marks (##). Documentation is printed by the
@@ -63,33 +62,36 @@ node_modules/.installed: package.json package-lock.json
 ## Build
 #####################################################################
 
-$(QMK_HOME): .venv/.installed
-	mkdir -p $$(dirname $(QMK_HOME))
-	$(REPO_ROOT)/.venv/bin/qmk \
-		--config-file qmk.ini \
-		setup \
-			--yes \
-			--home $(QMK_HOME) \
-			--branch firmware24 \
-			zsa/qmk_firmware
+third_party/qmk_firmware: .venv/.installed
+	@set -euo pipefail; \
+		mkdir -p third_party; \
+		$(REPO_ROOT)/.venv/bin/qmk \
+			--config-file qmk.ini \
+			setup \
+				--yes \
+				--home $$(pwd)/third_party/qmk_firmware \
+				--branch firmware24 \
+				zsa/qmk_firmware
 
-$(QMK_HOME)/keyboards/zsa/moonlander/keymaps/dvorak_ianlewis/%: ./moonlander/%
-	mkdir -p $$(dirname $@)
-	cp -r ./moonlander/$* $@
+third_party/qmk_firmware/keyboards/zsa/moonlander/keymaps/dvorak_ianlewis/%: ./moonlander/%
+	@set -euo pipefail; \
+		mkdir -p $$(dirname $@); \
+		cp -r ./moonlander/$* $@
 
-$(QMK_HOME)/moonlander_dvorak_ianlewis.bin: $(QMK_HOME) $(QMK_HOME)/keyboards/zsa/moonlander/keymaps/dvorak_ianlewis/keymap.c $(QMK_HOME)/keyboards/zsa/moonlander/keymaps/dvorak_ianlewis/rules.mk
-	cd $$(dirname $<)
-	$(REPO_ROOT)/.venv/bin/qmk \
-		--config-file qmk.ini \
-		compile \
-			--keyboard zsa/moonlander \
-			--keymap dvorak_ianlewis
+third_party/qmk_firmware/.build/zsa_moonlander_dvorak_ianlewis.bin: third_party/qmk_firmware third_party/qmk_firmware/keyboards/zsa/moonlander/keymaps/dvorak_ianlewis/keymap.c third_party/qmk_firmware/keyboards/zsa/moonlander/keymaps/dvorak_ianlewis/rules.mk
+	@set -euo pipefail; \
+		cd third_party/qmk_firmware; \
+		$(REPO_ROOT)/.venv/bin/qmk \
+			--config-file qmk.ini \
+			compile \
+				--keyboard zsa/moonlander \
+				--keymap dvorak_ianlewis
 
 .PHONY: moonlander-compile
-moonlander-compile: $(QMK_HOME)/moonlander_dvorak_ianlewis.bin ## compile moonlander firmware
+moonlander-compile: third_party/qmk_firmware/.build/zsa_moonlander_dvorak_ianlewis.bin ## compile moonlander firmware
 
 .PHONY: moonlander-flash
-moonlander-flash: $(QMK_HOME)/moonlander_dvorak_ianlewis.bin ## flash moonlander firmware
+moonlander-flash: moonlander-compile ## flash moonlander firmware
 	wally-cli $<
 
 # TODO: Add ergodox-ez compile & flash targets.
@@ -279,11 +281,6 @@ yamllint: .venv/.installed ## Runs the yamllint linter.
 
 ## Maintenance
 #####################################################################
-
-.PHONY: qmk-clean
-qmk-clean: .venv/.installed ## Clean qmk files.
-	cd $(QMK_HOME) &&
-		.venv/bin/qmk clean -a
 
 .PHONY: clean
 clean: ## Delete temporary files.
