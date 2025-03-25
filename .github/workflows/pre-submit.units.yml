@@ -22,10 +22,20 @@ on:
     branches: [main]
   workflow_dispatch:
 
-permissions:
-  contents: read # Needed to check out the repo.
+permissions: {}
 
 jobs:
+  # Build
+  ###############################
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - run: make ergodox_ez-compile
+      - run: make moonlander-compile
+
   # Check license headers
   ###############################
   license-headers:
