@@ -144,7 +144,16 @@ license-headers: ## Update license headers.
 #####################################################################
 
 .PHONY: format
-format: md-format yaml-format ## Format all files
+format: clang-format md-format yaml-format ## Format all files
+
+.PHONY: clang-format
+clang-format: ## Format C files.
+	@set -euo pipefail; \
+		files=$$( \
+			git ls-files --deduplicate \
+				'*.c' \
+		); \
+		clang-format -i $${files}
 
 .PHONY: md-format
 md-format: node_modules/.installed ## Format Markdown files.
