@@ -73,6 +73,23 @@ third_party/qmk_firmware: .venv/.installed
 				--branch firmware24 \
 				zsa/qmk_firmware
 
+third_party/qmk_firmware/keyboards/zsa/ergodox_ez/keymaps/dvorak_ianlewis/%: ./ergodox_ez/%
+	@set -euo pipefail; \
+		mkdir -p $$(dirname $@); \
+		cp -r ./ergodox_ez/$* $@
+
+third_party/qmk_firmware/.build/zsa_ergodox_ez_m32u4_base_dvorak_ianlewis.hex: third_party/qmk_firmware third_party/qmk_firmware/keyboards/zsa/ergodox_ez/keymaps/dvorak_ianlewis/keymap.c
+	@set -euo pipefail; \
+		cd third_party/qmk_firmware; \
+		$(REPO_ROOT)/.venv/bin/qmk \
+			--config-file qmk.ini \
+			compile \
+				--keyboard zsa/ergodox_ez \
+				--keymap dvorak_ianlewis
+
+.PHONY: ergodox_ez-compile
+ergodox_ez-compile: third_party/qmk_firmware/.build/zsa_ergodox_ez_m32u4_base_dvorak_ianlewis.hex ## compile ergodox_ez firmware
+
 third_party/qmk_firmware/keyboards/zsa/moonlander/keymaps/dvorak_ianlewis/%: ./moonlander/%
 	@set -euo pipefail; \
 		mkdir -p $$(dirname $@); \
@@ -89,12 +106,6 @@ third_party/qmk_firmware/.build/zsa_moonlander_dvorak_ianlewis.bin: third_party/
 
 .PHONY: moonlander-compile
 moonlander-compile: third_party/qmk_firmware/.build/zsa_moonlander_dvorak_ianlewis.bin ## compile moonlander firmware
-
-.PHONY: moonlander-flash
-moonlander-flash: moonlander-compile ## flash moonlander firmware
-	wally-cli $<
-
-# TODO: Add ergodox-ez compile & flash targets.
 
 ## Tools
 #####################################################################
