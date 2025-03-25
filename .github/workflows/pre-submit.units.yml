@@ -68,8 +68,8 @@ jobs:
       - uses: actions/setup-node@cdca7365b2dadb8aad0a33bc7601856ffabcc48e # v4.3.0
         with:
           node-version-file: "package.json"
-      - run: |
-          make format
+      # NOTE: clang-format is installed by default on ubuntu-latest.
+      - run: make format
       - name: check diff
         run: |
           set -euo pipefail
