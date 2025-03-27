@@ -12,37 +12,6 @@ node_modules/
 # qmk config
 qmk.ini
 
-# Object files
-*.o
-*.ko
-*.obj
-*.elf
-
-# Precompiled Headers
-*.gch
-*.pch
-
-# Libraries
-*.lib
-*.a
-*.la
-*.lo
-
-# Shared objects (inc. Windows DLLs)
-*.dll
-*.so
-*.so.*
-*.dylib
-
-# Executables
-*.exe
-*.out
-*.app
-*.i*86
-*.x86_64
+# Firmware binary files.
+*.bin
 *.hex
-
-# Debug files
-*.dSYM/
-*.su
-
