@@ -17,6 +17,8 @@ OUTPUT_FORMAT ?= $(shell if [ "${GITHUB_ACTIONS}" == "true" ]; then echo "github
 REPO_NAME = $(shell basename "$$(pwd)")
 REPO_ROOT := $(shell realpath $$(pwd))
 
+QMK_FIRMWARE_VERSION=0.28.0
+
 rwildcard=$(wildcard $1$2) $(foreach d,$(wildcard $1*),$(call rwildcard,$d/,$2))
 
 # The help command prints targets in groups. Help documentation in the Makefile
@@ -71,6 +73,7 @@ qmk.ini third_party/qmk_firmware: .venv/.installed
 			--config-file qmk.ini \
 			setup \
 				--yes \
+				--branch $(QMK_FIRMWARE_VERSION) \
 				--home $(REPO_ROOT)/third_party/qmk_firmware; \
 		$(REPO_ROOT)/.venv/bin/qmk \
 			--config-file qmk.ini \
