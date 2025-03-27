@@ -15,7 +15,9 @@
 SHELL := /bin/bash
 OUTPUT_FORMAT ?= $(shell if [ "${GITHUB_ACTIONS}" == "true" ]; then echo "github"; else echo ""; fi)
 REPO_NAME = $(shell basename "$$(pwd)")
-REPO_ROOT := $(shell echo $$(pwd))
+REPO_ROOT := $(shell realpath $$(pwd))
+
+rwildcard=$(wildcard $1$2) $(foreach d,$(wildcard $1*),$(call rwildcard,$d/,$2))
 
 # The help command prints targets in groups. Help documentation in the Makefile
 # uses comments with double hash marks (##). Documentation is printed by the
@@ -62,50 +64,53 @@ node_modules/.installed: package.json package-lock.json
 ## Build
 #####################################################################
 
-third_party/qmk_firmware: .venv/.installed
+qmk.ini third_party/qmk_firmware: .venv/.installed
 	@set -euo pipefail; \
 		mkdir -p third_party; \
 		$(REPO_ROOT)/.venv/bin/qmk \
 			--config-file qmk.ini \
 			setup \
 				--yes \
-				--home $$(pwd)/third_party/qmk_firmware \
-				--branch firmware24 \
-				zsa/qmk_firmware
-
-third_party/qmk_firmware/keyboards/zsa/ergodox_ez/keymaps/dvorak_ianlewis/%: ./ergodox_ez/%
-	@set -euo pipefail; \
-		mkdir -p $$(dirname $@); \
-		cp -r ./ergodox_ez/$* $@
-
-third_party/qmk_firmware/.build/zsa_ergodox_ez_m32u4_base_dvorak_ianlewis.hex: third_party/qmk_firmware third_party/qmk_firmware/keyboards/zsa/ergodox_ez/keymaps/dvorak_ianlewis/keymap.c
-	@set -euo pipefail; \
-		cd third_party/qmk_firmware; \
+				--home $(REPO_ROOT)/third_party/qmk_firmware; \
 		$(REPO_ROOT)/.venv/bin/qmk \
 			--config-file qmk.ini \
-			compile \
-				--keyboard zsa/ergodox_ez \
-				--keymap dvorak_ianlewis
+			config \
+				user.overlay_dir="$(REPO_ROOT)"
+
+
+ergodox_ez_base_ianlewis_dvorak.hex: qmk.ini third_party/qmk_firmware $(call rwildcard,keyboards/zsa/ergodox_ez,*.*)
+	@$(REPO_ROOT)/.venv/bin/qmk \
+		--config-file qmk.ini \
+		compile \
+			--keyboard ergodox_ez \
+			--keymap ianlewis_dvorak
 
 .PHONY: ergodox_ez-compile
-ergodox_ez-compile: third_party/qmk_firmware/.build/zsa_ergodox_ez_m32u4_base_dvorak_ianlewis.hex ## compile ergodox_ez firmware
+ergodox_ez-compile: ergodox_ez_base_ianlewis_dvorak.hex ## Compile Ergodox EZ firmware
 
-third_party/qmk_firmware/keyboards/zsa/moonlander/keymaps/dvorak_ianlewis/%: ./moonlander/%
-	@set -euo pipefail; \
-		mkdir -p $$(dirname $@); \
-		cp -r ./moonlander/$* $@
+ergodox_ez-flash: ergodox_ez_base_ianlewis_dvorak.hex ## Flash Ergodox EZ firmware
+	@$(REPO_ROOT)/.venv/bin/qmk \
+		--config-file qmk.ini \
+		compile \
+			--keyboard ergodox_ez \
+			--keymap ianlewis_dvorak
 
-third_party/qmk_firmware/.build/zsa_moonlander_dvorak_ianlewis.bin: third_party/qmk_firmware third_party/qmk_firmware/keyboards/zsa/moonlander/keymaps/dvorak_ianlewis/keymap.c third_party/qmk_firmware/keyboards/zsa/moonlander/keymaps/dvorak_ianlewis/rules.mk
-	@set -euo pipefail; \
-		cd third_party/qmk_firmware; \
-		$(REPO_ROOT)/.venv/bin/qmk \
-			--config-file qmk.ini \
-			compile \
-				--keyboard zsa/moonlander \
-				--keymap dvorak_ianlewis
+zsa_moonlander_ianlewis_dvorak.bin: qmk.ini third_party/qmk_firmware  $(call rwildcard,keyboards/zsa/moonlander,*.*)
+	@$(REPO_ROOT)/.venv/bin/qmk \
+		--config-file qmk.ini \
+		compile \
+			--keyboard zsa/moonlander \
+			--keymap ianlewis_dvorak 
 
 .PHONY: moonlander-compile
-moonlander-compile: third_party/qmk_firmware/.build/zsa_moonlander_dvorak_ianlewis.bin ## compile moonlander firmware
+moonlander-compile: zsa_moonlander_ianlewis_dvorak.bin ## Compile ZSA Moonlander firmware
+
+moonlander-flash: zsa_moonlander_ianlewis_dvorak.bin ## Flash ZSA Moonlander firmware
+	@$(REPO_ROOT)/.venv/bin/qmk \
+		--config-file qmk.ini \
+		compile \
+			--keyboard zsa/moonlander \
+			--keymap ianlewis_dvorak
 
 ## Tools
 #####################################################################
@@ -309,4 +314,7 @@ clean: ## Delete temporary files.
 			.venv \
 			node_modules \
 			*.sarif.json \
-			third_party; \
+			third_party \
+			*.bin \
+			*.hex \
+			qmk.ini
